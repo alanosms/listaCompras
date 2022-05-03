@@ -1,0 +1,54 @@
+*{
+    box-sizing: border-box;
+    margin: 0px;
+}
+body{
+    background: #C4C4C4;
+}
+.header{
+    text-align: center;
+    margin: 30px auto;
+    background-color: white;
+    height: auto;
+    width: 80%;
+    border-radius: 16px;
+    padding: 15px 50px;
+}
+.header input{
+    padding-left: 5px;
+    height: 30px;
+    border: solid 0.9px;
+    border-radius: 8px;
+}
+.header button{
+    background-color: #439535;
+    color: white;
+    padding: 10px;
+    width: 50%;
+    display: block;
+    margin: 15px auto;
+    border-radius: 16px;
+}
+.listProducts{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+    padding: 48px 50px;
+    border-radius: 16px;
+    background-color: white;
+    width: 80%;
+    height: 600px;
+    word-break: break-all;
+    overflow: auto;
+}
+.searchProduct{
+    position: absolute;
+    right: 40px;
+}
+.totalDiv{
+    position: relative;
+    background: #C4C4C4;
+    width: 40%;
+    padding: 1rem;
+}
