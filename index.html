@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet.css">
+    <title>Lista de Compras</title>
+</head>
+<body>
+    <div class="header">
+        <h1>Lista de compras</h1>
+        <input id="nameProduct" type="text" placeholder="Nome do produto:">
+        <input id="priceProduct" type="text" placeholder="Valor do produto (R$)">
+        <button class="addProduct">Adicionar</button>
+    </div>
+    <div class="listProducts">
+        <h2>Lista de produtos</h2>
+        <div class="searchProduct">
+            <input id="searchProductByName" type="text" placeholder="Buscar Produto:">
+        </div>
+        <hr>
+        <table id="tableProducts">
+            <tr>
+            <th>Nome do Produto</th>
+            <th>Preço BRL</th>
+            </tr>
+            <tr>
+            <td>Pacote Arroz 5kg</td>
+            <td>RS23,00</td>
+            </tr>
+            <tr>
+                <td>Biscoito</td>
+                <td>RS6,00</td>
+            </tr>
+        </table>
+        <div class="totalDiv"><span>Total: R$29,00</span></div>
+    </div>
+<script src="listarCompras.js"></script>    
+</body>
+</html>
