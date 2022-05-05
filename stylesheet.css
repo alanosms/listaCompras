@@ -4,6 +4,7 @@
 }
 body{
     background: #C4C4C4;
+    font-family: sans-serif;
 }
 .header{
     text-align: center;
@@ -42,13 +43,30 @@ body{
     word-break: break-all;
     overflow: auto;
 }
+#tableProducts{
+    word-break: break-all;
+    overflow: auto;
+}
+td{
+    text-align: center;
+}
 .searchProduct{
     position: absolute;
     right: 40px;
 }
+.searchProduct #searchProductByName{
+    display: none;
+}
 .totalDiv{
-    position: relative;
+    position: absolute;
+    bottom: 50px;
+    right: 30px;
     background: #C4C4C4;
     width: 40%;
     padding: 1rem;
+}
+#clearall{
+    position: absolute;
+    bottom: 60px;
+    left: 30px;
 }
