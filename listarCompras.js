@@ -10,13 +10,17 @@ const totalDiv = document.getElementById("totalDiv");
 let divResult = document.getElementById("result");
 let totalPurchases = 0;
 
+let parameterToSearch;
+let searching;
+
 let btnadd = document.getElementById("addProduct");
+let btnsearch = document.getElementById("btnSearch");
 
 btnadd.addEventListener("click", captureValues);
+btnsearch.addEventListener("click", search);
 clearall.addEventListener("click", clearAllList);
-function testaction() {
-  console.log("OK");
-}
+const searchProductByName = document.getElementById("searchProductByName");
+
 function captureValues() {
   let inputNameProduct = nameProduct.value;
   let inputPriceProduct = parseFloat(priceProduct.value);
@@ -36,7 +40,6 @@ function captureValues() {
   totalPurchases = 0;
   addRows();
 }
-
 function addRows() {
   clearList();
   values.forEach((el) => {
@@ -62,4 +65,14 @@ function clearList() {
     let rowCount = document.getElementById("tableProducts").rows.length;
     if (rowCount > 1) document.getElementById("tableProducts").deleteRow(1);
   });
+}
+function search() {
+  parameterToSearch = searchProductByName.value;
+  searching = values.filter((el) => el.name == parameterToSearch);
+  if (searching) {
+    console.log(searching);
+    searchProductByName.value = "";
+    return;
+  }
+  searchProductByName.value = "";
 }
