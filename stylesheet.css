@@ -13,22 +13,24 @@ body{
     height: auto;
     width: 80%;
     border-radius: 16px;
-    padding: 15px 50px;
+    padding: 15px;
 }
 .header input{
-    padding-left: 5px;
+    text-align: center;
     height: 30px;
+    width: 85%;
+    margin: 5px;
     border: solid 0.9px;
     border-radius: 8px;
 }
 .header button{
-    background-color: #439535;
+    background-color: #4CAF50;
     color: white;
     padding: 10px;
     width: 50%;
     display: block;
     margin: 15px auto;
-    border-radius: 16px;
+    border-radius: 10px;
 }
 .listProducts{
     position: relative;
@@ -50,12 +52,21 @@ body{
 td{
     text-align: center;
 }
+#btnSearch{
+    color: black;
+}
 .searchProduct{
-    position: absolute;
-    right: 40px;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
 }
 .searchProduct #searchProductByName{
-    display: none;
+    text-align: center;
+    height: 30px;
+    width: 85%;
+    margin: 5px;
+    border: solid 0.9px;
+    border-radius: 8px;
 }
 .totalDiv{
     position: absolute;
