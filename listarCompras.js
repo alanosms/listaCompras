@@ -34,7 +34,6 @@ function captureValues() {
 
   values.forEach((el) => {
     totalPurchases = totalPurchases + el.price;
-    console.log(el.price);
   });
   divResult.innerHTML = totalPurchases;
   totalPurchases = 0;
@@ -44,16 +43,25 @@ function addRows() {
   clearList();
   values.forEach((el) => {
     let rowCount = document.getElementById("tableProducts").rows.length;
-    if (rowCount > 1) document.getElementById("tableProducts").deleteRow(1);
+    if (rowCount > 1) document.getElementById("tableProducts").deleteRow();
   });
   values.forEach((el) => {
     let tableRow = tableProducts.insertRow();
-    let nomeproduto = tableRow.insertCell();
-    let precoproduto = tableRow.insertCell();
+    let nameProductValue = tableRow.insertCell();
+    let priceProductValue = tableRow.insertCell();
+    let removeProduct = tableRow.insertCell();
 
-    nomeproduto.innerHTML = el.name;
-    precoproduto.innerHTML = el.price;
+    nameProductValue.innerHTML = el.name;
+    priceProductValue.innerHTML = el.price;
+    removeProduct.innerHTML = "<button onclick='deleteRow(this)'>X</button>";
   });
+}
+function deleteRow(r) {
+  var i = r.parentNode.parentNode.rowIndex;
+  let indexProduct = i - 1;
+  document.getElementById("tableProducts").deleteRow(i);
+  divResult.innerHTML = divResult.innerHTML - values[indexProduct].price;
+  values.splice(indexProduct, 1);
 }
 function clearAllList() {
   clearList();
