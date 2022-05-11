@@ -52,8 +52,16 @@ body{
 td{
     text-align: center;
 }
+
 #btnSearch{
     color: black;
+}
+#btnSearchClose{
+    margin-left: 10px;
+    height: auto;
+    display: none;
+
+    word-break: normal;
 }
 .searchProduct{
     display: flex;
