@@ -11,11 +11,11 @@ let divResult = document.getElementById("result");
 let totalPurchases = 0;
 
 let parameterToSearch;
-let searching;
-let arrayMatchs = []; 
+let arrayMatchs = [];
 
 let btnadd = document.getElementById("addProduct");
 let btnsearch = document.getElementById("btnSearch");
+let btnSearchClose = document.getElementById("btnSearchClose");
 
 btnadd.addEventListener("click", captureValues);
 btnsearch.addEventListener("click", search);
@@ -78,16 +78,22 @@ function clearList() {
 function search() {
   parameterToSearch = searchProductByName.value;
   searchProductByName.value = "";
-  arrayMatchs.splice(0, arrayMatchs.length); 
-  values.forEach(el => {
-    let myReg = new RegExp(parameterToSearch)
+  if (parameterToSearch == '') return;
+  arrayMatchs.splice(0, arrayMatchs.length);
+  values.forEach((el) => {
+    let myReg = new RegExp(parameterToSearch);
     let myMatch = el.name.match(myReg);
-    if (myMatch){
+    if (myMatch) {
       arrayMatchs.push(el);
-  }});
-  if(arrayMatchs.length > 0) addRows(arrayMatchs);
+    }
+  });
+  if (arrayMatchs.length > 0){
+     addRows(arrayMatchs);
+     btnSearchClose.style.display = "inline-block";
   }
-  
-function closeSearch(){
+}
+function closeSearch() {
+  arrayMatchs.splice(0, arrayMatchs.length);
   addRows(values);
+  btnSearchClose.style.display = "none";
 }
