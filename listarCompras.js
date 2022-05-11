@@ -12,6 +12,7 @@ let totalPurchases = 0;
 
 let parameterToSearch;
 let searching;
+let arrayMatchs = []; 
 
 let btnadd = document.getElementById("addProduct");
 let btnsearch = document.getElementById("btnSearch");
@@ -37,15 +38,15 @@ function captureValues() {
   });
   divResult.innerHTML = totalPurchases;
   totalPurchases = 0;
-  addRows();
+  addRows(values);
 }
-function addRows() {
+function addRows(arrayInput) {
   clearList();
-  values.forEach((el) => {
+  arrayInput.forEach((el) => {
     let rowCount = document.getElementById("tableProducts").rows.length;
     if (rowCount > 1) document.getElementById("tableProducts").deleteRow();
   });
-  values.forEach((el) => {
+  arrayInput.forEach((el) => {
     let tableRow = tableProducts.insertRow();
     let nameProductValue = tableRow.insertCell();
     let priceProductValue = tableRow.insertCell();
@@ -76,11 +77,17 @@ function clearList() {
 }
 function search() {
   parameterToSearch = searchProductByName.value;
-  searching = values.filter((el) => el.name == parameterToSearch);
-  if (searching) {
-    console.log(searching);
-    searchProductByName.value = "";
-    return;
-  }
   searchProductByName.value = "";
+  arrayMatchs.splice(0, arrayMatchs.length); 
+  values.forEach(el => {
+    let myReg = new RegExp(parameterToSearch)
+    let myMatch = el.name.match(myReg);
+    if (myMatch){
+      arrayMatchs.push(el);
+  }});
+  if(arrayMatchs.length > 0) addRows(arrayMatchs);
+  }
+  
+function closeSearch(){
+  addRows(values);
 }
