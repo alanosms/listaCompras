@@ -27,13 +27,17 @@ const searchProductByName = document.getElementById("searchProductByName");
 function captureValues() {
   let inputNameProduct = nameProduct.value;
   let inputPriceProduct = parseFloat(priceProduct.value);
+
   if (inputNameProduct == "" || inputPriceProduct == "") {
     alert("Valores Invalido");
     return;
   }
+
+  if(isNaN(inputPriceProduct)) inputPriceProduct = 0;
+  
   const product ={
     id: increment,
-    name: inputNameProduct, 
+    name: inputNameProduct.toUpperCase(), 
     price: inputPriceProduct
   }
 
@@ -82,9 +86,8 @@ function deleteRow(id) {
 
   const productIndex = values.findIndex(product => product.id === id);
 
-  divResult.innerHTML = divResult.innerHTML - values[id].price;
+  divResult.innerHTML = divResult.innerHTML - values[productIndex].price;
   values.splice(productIndex, 1);
-  console.log("indexProduct: ", productIndex);
 }
 
 function checkID(){
@@ -104,7 +107,7 @@ function clearList() {
   });
 }
 function search() {
-  parameterToSearch = searchProductByName.value;
+  parameterToSearch = searchProductByName.value.toUpperCase();
   searchProductByName.value = "";
   if (parameterToSearch == '') return;
   arrayMatchs.splice(0, arrayMatchs.length);
