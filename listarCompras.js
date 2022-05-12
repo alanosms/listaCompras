@@ -4,7 +4,6 @@ const tableProducts = document.getElementById("tableProducts");
 
 const clearall = document.getElementById("clearall");
 
-
 let values = [];
 let increment = 0;
 
