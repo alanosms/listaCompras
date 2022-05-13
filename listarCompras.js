@@ -65,14 +65,11 @@ function addRows(arrayInput) {
 
   arrayInput.forEach((el) => {
     let tableRow = tableProducts.insertRow();
-    let idProductValue = tableRow.insertCell();
     let nameProductValue = tableRow.insertCell();
     let priceProductValue = tableRow.insertCell();
     let removeProduct = tableRow.insertCell();
 
     tableRow.id = `idRow${el.id}`;
-    
-    idProductValue.innerHTML = el.id;
     nameProductValue.innerHTML = el.name;
     priceProductValue.innerHTML = el.price;
     removeProduct.innerHTML = `<button onclick="deleteRow(${el.id})">X</button>`;
