@@ -10,13 +10,13 @@
 </head>
 <body>
     <div class="header">
-        <h1>Lista de compras</h1>
+        <h2>Lista de compras</h2>
         <input id="nameProduct" type="text" placeholder="Nome do produto:">
         <input id="priceProduct" type="text" placeholder="Valor do produto (R$)">
         <button id="addProduct" type="submit">Adicionar</button>
     </div>
     <div class="listProducts">
-        <h2>Lista de produtos</h2>
+        <h2>Produtos</h2>
         <div class="searchProduct">
             <input id="searchProductByName" type="text" placeholder="Buscar Produto:">
             <button id="btnSearch"><i data-feather="search"></i></button>
@@ -25,11 +25,9 @@
         <hr>
         <table id="tableProducts">
             <tr>
-            <th>ID</th>
-            <th>Nome do Produto</th>
+            <th>Nome</th>
             <th>Preço BRL</th>
             <th>Remover</th>
-                
             </tr>
         </table>
         <div class="totalDiv"><span>Total: R$</span><span id="result">0.00</span></div>
