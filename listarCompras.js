@@ -1,57 +1,46 @@
 const nameProduct = document.getElementById("nameProduct");
 const priceProduct = document.getElementById("priceProduct");
 const tableProducts = document.getElementById("tableProducts");
-
-const clearall = document.getElementById("clearall");
+const clearAllButton = document.getElementById("clearall");
+const totalDiv = document.getElementById("totalDiv");
+const divResult = document.getElementById("result");
+const searchProductByName = document.getElementById("searchProductByName");
+const btnAdd = document.getElementById("addProduct");
+const btnSearch = document.getElementById("btnSearch");
+const btnSearchClose = document.getElementById("btnSearchClose");
 
 let values = [];
 let increment = 0;
-
-const totalDiv = document.getElementById("totalDiv");
-let divResult = document.getElementById("result");
 let totalPurchases = 0;
-
 let parameterToSearch;
 let arrayMatchs = [];
 
-let btnadd = document.getElementById("addProduct");
-let btnsearch = document.getElementById("btnSearch");
-let btnSearchClose = document.getElementById("btnSearchClose");
-
-btnadd.addEventListener("click", captureValues);
-btnsearch.addEventListener("click", search);
-clearall.addEventListener("click", clearAllList);
-const searchProductByName = document.getElementById("searchProductByName");
+btnAdd.addEventListener("click", captureValues);
+btnSearch.addEventListener("click", search);
+clearAllButton.addEventListener("click", clearAllList);
 
 function captureValues() {
-  let inputNameProduct = nameProduct.value;
-  let inputPriceProduct = parseFloat(priceProduct.value);
+  const inputNameProduct = nameProduct.value;
+  const inputPriceProduct = parseFloat(priceProduct.value);
 
-  if (inputNameProduct == "" || inputPriceProduct == "") {
-    alert("Valores Invalido");
+  if (inputNameProduct === "" || isNaN(inputPriceProduct)) {
+    alert("Invalid values");
     return;
   }
 
-  if(isNaN(inputPriceProduct)) inputPriceProduct = 0;
-  
-  const product ={
+  const product = {
     id: increment,
-    name: inputNameProduct.toUpperCase(), 
-    price: inputPriceProduct
-  }
+    name: inputNameProduct.toUpperCase(),
+    price: inputPriceProduct,
+  };
 
   values.push(product);
 
   nameProduct.value = "";
   priceProduct.value = "";
-  increment = increment + 1;
+  increment++;
 
-  values.forEach((el) => {
-    totalPurchases = totalPurchases + el.price;
-  });
-
-  divResult.innerHTML = totalPurchases;
-  totalPurchases = 0;
+  updateTotal();
   addRows(values);
 }
 
@@ -59,69 +48,55 @@ function addRows(arrayInput) {
   clearList();
 
   arrayInput.forEach((el) => {
-    let rowCount = document.getElementById("tableProducts").rows.length;
-    if (rowCount > 1) document.getElementById("tableProducts").deleteRow();
-  });
-
-  arrayInput.forEach((el) => {
-    let tableRow = tableProducts.insertRow();
-    let nameProductValue = tableRow.insertCell();
-    let priceProductValue = tableRow.insertCell();
-    let removeProduct = tableRow.insertCell();
-
+    const tableRow = tableProducts.insertRow();
     tableRow.id = `idRow${el.id}`;
-    nameProductValue.innerHTML = el.name;
-    priceProductValue.innerHTML = el.price;
-    removeProduct.innerHTML = `<button onclick="deleteRow(${el.id})">X</button>`;
+    tableRow.innerHTML = `
+      <td>${el.name}</td>
+      <td>${el.price}</td>
+      <td><button onclick="deleteRow(${el.id})">X</button></td>
+    `;
   });
 }
+
 function deleteRow(id) {
-
-  const row = document.getElementById(`idRow${id}`);
-  row.parentNode.removeChild(row);
-
-  const productIndex = values.findIndex(product => product.id === id);
-
-  divResult.innerHTML = divResult.innerHTML - values[productIndex].price;
-  values.splice(productIndex, 1);
-}
-
-function checkID(){
-  const index = values.findIndex(el => el.id == comp);
-  return index;
+  const index = values.findIndex((product) => product.id === id);
+  if (index !== -1) {
+    tableProducts.deleteRow(index + 1);
+    divResult.innerHTML -= values[index].price;
+    values.splice(index, 1);
   }
+}
 
 function clearAllList() {
   clearList();
   values = [];
-  alert("OK. lista apagada");
+  updateTotal();
+  alert("List cleared");
 }
-function clearList() {
-  values.forEach((el) => {
-    let rowCount = document.getElementById("tableProducts").rows.length;
-    if (rowCount > 1) document.getElementById("tableProducts").deleteRow(1);
-  });
-}
-function search() {
-  parameterToSearch = searchProductByName.value.toUpperCase();
-  searchProductByName.value = "";
-  if (parameterToSearch == '') return;
-  arrayMatchs.splice(0, arrayMatchs.length);
-  values.forEach((el) => {
-    let myReg = new RegExp(parameterToSearch);
-    let myMatch = el.name.match(myReg);
-    if (myMatch) {
-      arrayMatchs.push(el);
-    }
 
-  });
-  if (arrayMatchs.length > 0){
-     addRows(arrayMatchs);
-     btnSearchClose.style.display = "inline-block";
+function clearList() {
+  while (tableProducts.rows.length > 1) {
+    tableProducts.deleteRow(1);
   }
 }
+
+function updateTotal() {
+  totalPurchases = values.reduce((total, product) => total + product.price, 0);
+  divResult.textContent = totalPurchases;
+}
+
+function search() {
+  parameterToSearch = searchProductByName.value.toUpperCase();
+  if (parameterToSearch === "") return;
+
+  arrayMatchs = values.filter((el) => el.name.includes(parameterToSearch));
+  addRows(arrayMatchs);
+
+  btnSearchClose.style.display = "inline-block";
+}
+
 function closeSearch() {
-  arrayMatchs.splice(0, arrayMatchs.length);
+  arrayMatchs = [];
   addRows(values);
   btnSearchClose.style.display = "none";
 }
